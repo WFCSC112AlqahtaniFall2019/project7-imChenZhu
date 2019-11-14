@@ -17,11 +17,11 @@ LinkedList::LinkedList(const LinkedList& list) {
     if(list.head) {
         Node *curr, *listcurr;
         // copy head node data
-        head = curr = new Node(list.head->item);
+        head = curr = new Node(list.head->data);
         listcurr = list.head->next;
         // loop over rest of nodes, copying data
         while (listcurr != nullptr) {
-            curr = curr->next = new Node(listcurr->item);
+            curr = curr->next = new Node(listcurr->data);
             listcurr = listcurr->next;
         }
     } else {
@@ -40,11 +40,12 @@ void LinkedList::print(ostream &os) {
     // start at the head of the list
     Node *curr = head;
     while (curr != nullptr) {
-        os << curr->item << endl; // use overloaded output operator to print
+        Data temp = curr->data;
+        os << temp ;
         curr = curr->next; // go to next node in list
     }
 }
-void LinkedList::pop_head() {
+void LinkedList::pop() {
     // if not an empty list
     if (head != nullptr) {
         // save location of where head points
@@ -56,8 +57,8 @@ void LinkedList::pop_head() {
     }
 }
 LinkedList::~LinkedList() {
-    // keep popping until empty list
+    // keep popping until list is empty
     while (head != nullptr) {
-        pop_head();
+        pop();
     }
 }
